@@ -5,7 +5,7 @@ const bateriaText = document.querySelector('.bateria b')
 const person = document.querySelector('.personagem');
 const img = document.querySelector('.personagem img')
 var porcen
-porcen = 0
+porcen = 70
 
 var terraY = terra.offsetTop + terra.clientHeight
 
@@ -29,8 +29,10 @@ var objSize = 87;
 var alturaTela = tela.clientHeight;
 var larguraTela = tela.clientWidth;
 
-var bateria = 0;
+var bateria = porcen;
 bateriaText.innerHTML = `${bateria}%`;
+
+var abrido = false
 
 // aqui se inicia tudo
 
@@ -126,8 +128,8 @@ function enterFrame() {
    energiaData.ePy = -100;
    energiaData.ePx = Math.random() * (larguraTela - energiaSize);
 
-   bateria = Math.max(bateria - 2, 0);
-   porcen = Math.max(porcen - 2, 0);
+   bateria = Math.max(bateria - 4, 0);
+   porcen = Math.max(porcen - 4, 0);
 
    img.src = 'XoX.png'
    person.classList.add('vibration')
@@ -145,6 +147,19 @@ function enterFrame() {
 
  bateriaText.innerHTML = `${bateria}%`;
  bateriaPorcen.style.width = `${porcen}%`;
+
+ if (bateria === 100 && !abrido) {
+  window.open('https://www.youtube.com/watch?v=xvFZjo5PgG0&ab_channel=Duran')
+  abrido = true
+ }
+
+ if (bateria <= 25) {
+  bateriaPorcen.style.backgroundColor = 'red'
+ } else if (bateria <= 75) {
+  bateriaPorcen.style.backgroundColor = 'yellow'
+ } else if (bateria <= 100) {
+  bateriaPorcen.style.backgroundColor = 'green'
+ }
 }
 
 window.addEventListener('load', iniciar)
